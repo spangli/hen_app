@@ -1,16 +1,16 @@
 package hu.marton.schpangli.eggs.adapter
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import hu.marton.schpangli.R
-import hu.marton.schpangli.model.Chicken
+import hu.marton.schpangli.model.Hen
 import kotlinx.android.synthetic.main.item_chicken.view.*
 
 class ChickenAdapter(val listener: OnChickenClick): RecyclerView.Adapter<ChickenAdapter.ChickenViewHolder>() {
 
-    private var itemList = mutableListOf<Chicken>()
+    private var itemList = mutableListOf<Hen>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChickenViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -34,22 +34,22 @@ class ChickenAdapter(val listener: OnChickenClick): RecyclerView.Adapter<Chicken
     }
 
     inner class ChickenViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        var item: Chicken? = null
+        var item: Hen? = null
 
-        fun bind(item: Chicken) = with(itemView) {
+        fun bind(item: Hen) = with(itemView) {
             this@ChickenViewHolder.item = item
-            tv_name.text = "Chicken eggs: " + item.numberOfEggs?.toString()
+            tv_name.text = "Hen eggs: " + item.id.toString()
 
         }
     }
 
-    fun setList(itemList: List<Chicken>) {
+    fun setList(itemList: List<Hen>) {
         this.itemList.clear()
         this.itemList.addAll(itemList)
         notifyDataSetChanged()
     }
 
     interface OnChickenClick {
-        fun onChickenClick(item: Chicken)
+        fun onChickenClick(item: Hen)
     }
 }

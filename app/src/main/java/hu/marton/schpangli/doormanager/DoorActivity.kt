@@ -1,7 +1,7 @@
 package hu.marton.schpangli.doormanager
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import hu.marton.schpangli.R
 
 class DoorActivity : AppCompatActivity() {
