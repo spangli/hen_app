@@ -1,22 +1,27 @@
 package hu.marton.schpangli.eggs
 
 import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import hu.marton.schpangli.model.Hen
+import hu.marton.schpangli.model.ResponseEggs
+import hu.marton.schpangli.model.ResponseHen
 import hu.marton.schpangli.network.ApiService
-import hu.marton.schpangli.util.Consts
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import okhttp3.*
-import java.io.IOException
-import okhttp3.RequestBody
-
+import okhttp3.OkHttpClient
 
 
 class EggsPresenter(val screen: EggsScreen, val context: Context) {
 
-	private val client = OkHttpClient()
-
 	fun getHens() {
+		val hensJSON = "{\"hens\":[{\"id\":\"1\"},{\"id\":\"2\"},{\"id\":\"3\"},{\"id\":\"4\"},{\"id\":\"5\"},{\"id\":\"6\"},{\"id\":\"7\"},{\"id\":\"8\"}]}"
+
+		val henObj = Gson().fromJson(hensJSON, ResponseHen::class.java)
+
+		screen.loadHens(henObj.henList!!)
+
+
 		ApiService.create(context).getHens()
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
@@ -32,25 +37,4 @@ class EggsPresenter(val screen: EggsScreen, val context: Context) {
 					error.printStackTrace()
 				})
 	}
-
-//	fun getHens() {
-//		val reqbody = RequestBody.create(null, ByteArray(0))
-//		val request = Request.Builder()
-//				.method("POST",reqbody)
-//				.url(Consts.BASE_URL + "getHenAPI.php")
-//				.build()
-//
-//		client.newCall(request).enqueue(object : Callback {
-//			override fun onFailure(call: Call, e: IOException) {
-//				e.printStackTrace()
-//			}
-//			override fun onResponse(call: Call, response: Response) {
-//				if (response.isSuccessful) {
-//					screen.loadHens(response.body() as ArrayList<Hen>)
-//				} else {
-//					screen.showMessage(response.message())
-//				}
-//			}
-//		})
-//	}
 }

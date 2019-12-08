@@ -2,6 +2,7 @@ package hu.marton.schpangli.network
 
 import android.content.Context
 import hu.marton.schpangli.model.Hen
+import hu.marton.schpangli.model.ResponseEggs
 import hu.marton.schpangli.model.ResponseHen
 import io.reactivex.Observable
 import okhttp3.Interceptor
@@ -19,10 +20,13 @@ interface ApiService {
     @POST("getHenAPI.php")
     fun getHens(): Observable<Response<ResponseHen>>
 
+    @POST("getEggsAPI.php")
+    fun getEggs(): Observable<Response<ResponseEggs>>
+
     companion object Factory {
 
         private fun getBaseUrl(): String {
-            return "http://77.234.64.61/"
+            return "http://127.0.0.1:80/"
         }
 
         fun create(context: Context): ApiService {

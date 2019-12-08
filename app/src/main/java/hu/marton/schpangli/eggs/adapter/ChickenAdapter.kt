@@ -24,7 +24,7 @@ class ChickenAdapter(val listener: OnChickenClick): RecyclerView.Adapter<Chicken
         holder.mView.setOnClickListener { view ->
             holder.item?.let {
                 holder.bind(itemList[position])
-                listener?.onChickenClick(it)
+                listener.onChickenClick(it)
             }
         }
     }

@@ -1,5 +1,9 @@
 package hu.marton.schpangli.network.model
 
-class Egg {
+import com.google.gson.annotations.SerializedName
 
+class Egg {
+	val date: String? = null
+	@SerializedName("chickenid")
+	val chickenId: String? = null
 }
